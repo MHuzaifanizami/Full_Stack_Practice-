@@ -10,7 +10,7 @@ const products = []
 app.use(express.json())
 const todos = [];
 
-app.use(cors('*'))
+app.use(cors())
 
 
 app.get('/', (req, res) => {
