@@ -1,6 +1,5 @@
 
 import express from 'express'
-import { send } from 'vite'
 import cors from 'cors'
 
 
@@ -148,3 +147,4 @@ app.use((req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
