@@ -1,7 +1,7 @@
 
 import express from 'express'
 import { send } from 'vite'
-// import cors from 'cors'
+import cors from 'cors'
 
 
 const app = express()
@@ -10,7 +10,7 @@ const products = []
 app.use(express.json())
 const todos = [];
 
-// app.use(cors('*'))
+app.use(cors('*'))
 
 
 app.get('/', (req, res) => {
