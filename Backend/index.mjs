@@ -8,6 +8,12 @@ app.use(express.json())
 const todos = [];
 
 
+app.get('/', (req, res) => {
+  console.log("todo in get", req.body);
+
+  res.send("hello world")
+})
+
 app.get('/get-todos', (req, res) => {
   console.log("todo in get", req.body);
 
