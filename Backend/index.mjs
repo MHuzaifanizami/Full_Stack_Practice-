@@ -1,11 +1,16 @@
 
 import express from 'express'
 import { send } from 'vite'
+import cors from './cors'
+
+
 const app = express()
 const port = 3000
 const products = []
 app.use(express.json())
 const todos = [];
+
+app.use(cors('*'))
 
 
 app.get('/', (req, res) => {
