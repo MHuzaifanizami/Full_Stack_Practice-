@@ -12,29 +12,31 @@ const todos = [];
 app.use(cors())
 
 
-app.get('/', (req, res) => {
+// app.get('/', (req, res) => {
+//   console.log("todo in get", req.body);
+
+//   res.send("hello world")
+// })
+
+app.get('/api/v1/get-todos', (req, res) => {
+
+  const message = !todos.length ? "Empty Todos" : "YE le Todo"
   console.log("todo in get", req.body);
 
-  res.send("hello world")
+  res.send({ data: todos, message: message })
 })
 
-app.get('/get-todos', (req, res) => {
-  console.log("todo in get", req.body);
-
-  res.send(todos)
-})
-
-app.post('/post-todos', (req, res) => {
+app.post('/api/v1/post-todos', (req, res) => {
 
   const todoObj = {
-    todo: req.body.todoContent,
-    id: Date.now()
+    todo: req.body.todo,
+    id: String(new Date().getTime())
   }
   todos.push(todoObj)
-  res.send('todo added successfully')
+  res.send({ data: todoObj, message: "todo added successfully" })
 })
 
-app.delete('/delete-todos/:id', (req, res) => {
+app.delete('/api/v1/delete-todos/:id', (req, res) => {
   const id = req.params.id
   let isFound = false
 
@@ -48,7 +50,7 @@ app.delete('/delete-todos/:id', (req, res) => {
   }
 
   if (isFound) {
-    res.status(200).send("Todo deleted");
+    res.status(200).send({ message: "Todo deleted" });
   } else {
 
     res.status(404).send("Todo not avaliable");
@@ -57,7 +59,7 @@ app.delete('/delete-todos/:id', (req, res) => {
 })
 
 
-app.patch('/update-todos/:id', (req, res) => {
+app.patch('/api/v1/update-todos/:id', (req, res) => {
   const id = req.params.id
   let isFound = false
   let todo = req.body.todo
@@ -73,7 +75,7 @@ app.patch('/update-todos/:id', (req, res) => {
   }
 
   if (isFound) {
-    res.status(200).send("Todo updated");
+    res.status(200).send({ message: "Todo updated" });
   } else {
 
     res.status(404).send("Todo not avaliable");
