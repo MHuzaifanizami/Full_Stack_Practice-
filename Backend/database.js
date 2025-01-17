@@ -1,0 +1,1 @@
+const mongodbUri = 'mongodb+srv://huzaifa:0nzNBXppf69J9in2@lms.fdumy.mongodb.net/?retryWrites=true&w=majority&appName=LMS'
