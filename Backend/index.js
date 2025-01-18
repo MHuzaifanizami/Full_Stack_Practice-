@@ -1,7 +1,8 @@
 
 import express from 'express'
 import cors from 'cors'
-
+import './database.js'
+import { Todo } from './models/todoModel.js'
 
 const app = express()
 const port = 3000
@@ -18,39 +19,45 @@ app.use(cors())
 //   res.send("hello world")
 // })
 
-app.get('/api/v1/get-todos', (req, res) => {
-
+app.get('/api/v1/get-todos', async (req, res) => {
+  const todos = await Todo.find()
   const message = !todos.length ? "Empty Todos" : "YE le Todo"
   console.log("todo in get", req.body);
 
   res.send({ data: todos, message: message })
 })
 
-app.post('/api/v1/post-todos', (req, res) => {
+app.post('/api/v1/post-todos', async (req, res) => {
 
   const todoObj = {
     todo: req.body.todo,
-    id: String(new Date().getTime())
+    // id: String(new Date().getTime())
+    ip: req.ip
   }
-  todos.push(todoObj)
+  // todos.push(todoObj)
+  const result = await Todo.create(todoObj)
+  console.log("res in badabase", result);
+
   res.send({ data: todoObj, message: "todo added successfully" })
 })
 
-app.delete('/api/v1/delete-todos/:id', (req, res) => {
+app.delete('/api/v1/delete-todos/:id', async(req, res) => {
   const id = req.params.id
   let isFound = false
 
-  for (let i = 0; i < todos.length; i++) {
+  // for (let i = 0; i < todos.length; i++) {
 
-    if (todos[i].id == id) {
-      todos.splice(i, 1)
-      isFound = true
-      break
-    }
-  }
+  //   if (todos[i].id == id) {
+  //     todos.splice(i, 1)
+  //     isFound = true
+  //     break
+  //   }
+  // }
 
-  if (isFound) {
-    res.status(200).send({ message: "Todo deleted" });
+  const deletedTodo = await Todo.findByIdAndDelete(id)
+
+  if (deletedTodo) {
+    res.status(200).send({ data : deletedTodo ,  message: "Todo deleted" });
   } else {
 
     res.status(404).send("Todo not avaliable");
@@ -59,26 +66,31 @@ app.delete('/api/v1/delete-todos/:id', (req, res) => {
 })
 
 
-app.patch('/api/v1/update-todos/:id', (req, res) => {
+app.patch('/api/v1/update-todos/:id', async (req, res) => {
   const id = req.params.id
   let isFound = false
   let todo = req.body.todo
   console.log("todo updated", todo);
 
-  for (let i = 0; i < todos.length; i++) {
+  // for (let i = 0; i < todos.length; i++) {
 
-    if (todos[i].id == id) {
-      todos[i].todo = todo
-      isFound = true
-      break
+  //   if (todos[i].id == id) {
+  //     todos[i].todo = todo
+  //     isFound = true
+  //     break
+  //   }
+  // }
+  const updatedTodo = await Todo.findByIdAndUpdate(id,
+    {
+      todo: req.body.todo
     }
-  }
+  )
 
-  if (isFound) {
-    res.status(200).send({ message: "Todo updated" });
+  if (updatedTodo) {
+    res.status(200).send({ data: updatedTodo, message: "Todo updated" });
   } else {
 
-    res.status(404).send("Todo not avaliable");
+    res.status(404).send({data : null ,message : "Todo not avaliable"});
   }
 
 })
