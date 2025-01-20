@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-const mongodbUri = 'mongodb+srv://huzaifa:0nzNBXppf69J9in2@lms.fdumy.mongodb.net/?retryWrites=true&w=majority&appName=LMS'
+ const mongodbUri = 'mongodb+srv://huzaifa:0nzNBXppf69J9in2@lms.fdumy.mongodb.net/?retryWrites=true&w=majority&appName=LMS'
 
 
 const connectDB = async () => {
