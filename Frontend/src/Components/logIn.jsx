@@ -11,7 +11,7 @@ const LoginForm = () => {
     event.preventDefault()
     const email =  event.target.elements.email.value
     const password =  event.target.elements.password.value
-    const res = await axios.post('http://localhost:3000/api/v1/login', {
+    const res = await axios.post('https://full-stack-practice-backend.vercel.app/api/v1/login', {
       email: email,
       password: password
     })

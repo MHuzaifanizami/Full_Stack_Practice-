@@ -3,7 +3,7 @@ import React from 'react';
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom';
 const SignupForm = () => {
-  
+
   const navigate = useNavigate()
 
   const signUp = async (event) => {
@@ -11,7 +11,7 @@ const SignupForm = () => {
     const name = event.target.elements.name.value
     const email = event.target.elements.email.value
     const password = event.target.elements.password.value
-    const res = await axios.post('http://localhost:3000/api/v1/signup', {
+    const res = await axios.post('https://full-stack-practice-backend.vercel.app/api/v1/signup', {
       name: name,
       email: email,
       password: password
