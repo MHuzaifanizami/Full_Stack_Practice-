@@ -61,7 +61,7 @@ app.post('/api/v1/login', async (req, res) => {
 })
 
 
-// Todo Routes 
+// Todo Routes ///
 
 app.get('/api/v1/get-todos', async (req, res) => {
   const todos = await Todo.find()
