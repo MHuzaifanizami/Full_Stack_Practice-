@@ -11,7 +11,7 @@ const SignupForm = () => {
     const name = event.target.elements.name.value
     const email = event.target.elements.email.value
     const password = event.target.elements.password.value
-    const res = await axios.post('/api/v1/signup', {
+    const res = await axios.post('https://full-stack-practice-backend.vercel.app/api/v1/signup', {
       name: name,
       email: email,
       password: password

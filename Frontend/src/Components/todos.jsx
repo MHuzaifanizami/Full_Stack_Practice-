@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 
 function Todos() {
 
- const BASE_URL = 'http://localhost:3000'
+ const BASE_URL = 'https://full-stack-practice-backend.vercel.app'
   const [todos, setTodos] = useState([])
 
   console.log("settodos", todos);
